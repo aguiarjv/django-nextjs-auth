@@ -12,7 +12,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         user = self.user
 
         data["email"] = user.email
-        data["access_expires"] = access_lifetime
-        data["refresh_expires"] = refresh_lifetime
+        data["access_expires_in"] = access_lifetime
+        data["refresh_expires_in"] = refresh_lifetime
 
         return data
