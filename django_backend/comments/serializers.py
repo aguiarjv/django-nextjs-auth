@@ -13,6 +13,7 @@ class CommentSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
 
         if (request is not None and request.method == "POST"):
+            # When it is a post request, add the user to the data dict
             data['user'] = request.user
 
         return data
