@@ -4,7 +4,7 @@ from django.urls import path
 from accounts.views import (
     CustomTokenObtainPairView, CustomTokenRefreshView,
     RegistrationView, PasswordChangeView)
-from comments.views import CommentListCreateView, CommentRetrieveUpdateDestroyView
+from posts.views import PostListCreateView, PostRetrieveUpdateDestroyView
 
 
 urlpatterns = [
@@ -14,8 +14,8 @@ urlpatterns = [
          name="token_obtain_pair"),
     path("api/token/refresh/", CustomTokenRefreshView.as_view(), name="token_refresh"),
 
-    path("comment/", CommentListCreateView.as_view(), name='comment-list-create'),
-    path("comment/<int:pk>/", CommentRetrieveUpdateDestroyView.as_view(),
+    path("comment/", PostListCreateView.as_view(), name='comment-list-create'),
+    path("comment/<int:pk>/", PostRetrieveUpdateDestroyView.as_view(),
          name='comment-detail-view'),
 
     path("register/", RegistrationView.as_view(), name='registration-view'),

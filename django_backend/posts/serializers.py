@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from comments.models import Comment
+from posts.models import Post
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(slug_field='email', read_only=True)
 
     class Meta:
-        model = Comment
+        model = Post
         fields = '__all__'
 
     def validate(self, data):
