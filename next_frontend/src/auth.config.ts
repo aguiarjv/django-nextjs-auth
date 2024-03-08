@@ -41,6 +41,10 @@ export const authConfig = {
       const isOnDashboard = nextUrl.pathname.startsWith("/dashboard");
 
       if (isOnDashboard) {
+        // Check if the refresh token has expired and sign the user out
+        if (auth?.error === "RefreshAccessTokenError") {
+          return Response.redirect(new URL("/api/logout", nextUrl));
+        }
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
@@ -81,7 +85,6 @@ export const authConfig = {
           const tokenData = await response.json();
 
           if (!response.ok) throw tokenData;
-          console.log("TOKEN REFRESHED");
 
           return {
             ...token,
