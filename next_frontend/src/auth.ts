@@ -19,22 +19,22 @@ export const { auth, signIn, signOut } = NextAuth({
           const { email, password } = parsedCredentials.data;
           const body = { username: email, password: password };
 
-          const response = await fetch(credentialsServerUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          });
+          try {
+            const response = await fetch(credentialsServerUrl, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(body),
+            });
 
-          if (response.status == 200) {
             const data = await response.json();
-            console.log("RESPONSE DATA: ", data);
+
+            if (!response.ok) throw data;
+
             return data;
-          } else {
-            const data = await response.json();
-            console.log("RESPONSE DATA 400: ", data);
-            return null;
+          } catch (err) {
+            console.error("Error fetching credentials", err);
           }
         }
         return null;
