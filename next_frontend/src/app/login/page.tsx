@@ -12,10 +12,10 @@ export default function Login() {
     <div className="w-screen h-screen flex items-center ">
       <form
         action={dispatch}
-        className="w-1/4 mx-auto flex flex-col gap-6 items-center justify-center border-2 rounded-lg p-3 "
+        className="mx-auto flex flex-col gap-6 items-center justify-center border-2 rounded-lg p-3 w-[450px] "
       >
         <h1 className="font-bold text-lg ">Login</h1>
-        <Input type="text" name="email" placeholder="username" />
+        <Input type="text" name="email" placeholder="username or email" />
         <Input type="password" name="password" placeholder="password" />
         <LoginButton />
         <div>
