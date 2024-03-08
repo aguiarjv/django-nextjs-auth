@@ -6,6 +6,12 @@ from accounts.models import CustomUser
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """
+    Custom Token Obtain Pair:
+    This serializer adds the user email and the
+    access token lifetime in seconds to the response
+    """
+
     def validate(self, attrs):
         data = super().validate(attrs)
 
@@ -20,6 +26,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class CustomTokenRefreshSerializer(TokenRefreshSerializer):
+    """
+    Custom Token Refresh
+    adds access token lifetime in seconds to the response
+    """
+
     def validate(self, attrs):
         data = super().validate(attrs)
 
@@ -31,6 +42,13 @@ class CustomTokenRefreshSerializer(TokenRefreshSerializer):
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    """
+    Register a new user that submits an email and two
+    password (to test if they are equal)
+
+    The email value will be used as the CustomUser username
+    """
+
     password2 = serializers.CharField(
         style={"input_type": "password"}, write_only=True)
 
@@ -59,6 +77,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 class PasswordChangeSerializer(serializers.Serializer):
+    """
+    Simple serializer to change the current password of
+    an authenticated user
+    """
+
     current_password = serializers.CharField(
         style={"input_type": "password"}, required=True, write_only=True)
     new_password = serializers.CharField(
