@@ -1,4 +1,4 @@
-#Next.js authentication with DRF backend
+# Next.js authentication with DRF backend
 
 This project seeks to implement a Next.js app that uses JWT tokens provided by a Django Rest Framework backend.
 It is a simple app where the user can create new posts and the main page shows a list of the user's posts information.
