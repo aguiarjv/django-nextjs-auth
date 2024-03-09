@@ -13,7 +13,7 @@ TODO
 - New post screen
 
 ## Auth
-- [DRF Simple Jwt](https://github.com/jazzband/djangorestframework-simplejwt) was used to implement token authentication in the django backend.
+- [DRF Simple JWT](https://github.com/jazzband/djangorestframework-simplejwt) was used to implement token authentication in the django backend.
 - [NextAuth.js](https://github.com/nextauthjs/next-auth) was used to implement authentication in the Next.js app.
 
 ## Features
