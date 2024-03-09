@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useFormState, useFormStatus } from "react-dom";
 import { authenticate } from "@/lib/actions";
 import Link from "next/link";
+import { LogIn } from "lucide-react";
 
 export default function Login() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
@@ -36,8 +37,9 @@ function LoginButton() {
   const { pending } = useFormStatus();
 
   return (
-    <Button className="w-full" aria-disabled={pending}>
-      Log In
+    <Button className="w-full space-x-2" aria-disabled={pending}>
+      <span>Login</span>
+      <LogIn className="size-5" />
     </Button>
   );
 }
