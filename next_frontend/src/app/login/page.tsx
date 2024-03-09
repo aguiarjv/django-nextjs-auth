@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useFormState, useFormStatus } from "react-dom";
 import { authenticate } from "@/lib/actions";
+import Link from "next/link";
 
 export default function Login() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
@@ -20,9 +21,12 @@ export default function Login() {
         <LoginButton />
         <div>
           {errorMessage && (
-            <p className="text-red-500 font-medium">{errorMessage}</p>
+            <p className="text-red-500 font-medium -mt-4">{errorMessage}</p>
           )}
         </div>
+        <Link href="/dasbhoard" className="self-start -mt-8 -ml-2">
+          <Button variant="link">New user? Sign in</Button>
+        </Link>
       </form>
     </div>
   );

@@ -6,8 +6,9 @@ export function DashHeader() {
   return (
     <div className="flex flex-row items-center justify-between">
       <DashSearchBar />
-      <Button className="space-x-1">
-        <span>Add new post</span> <CirclePlus className="size-5" />
+      <Button variant="secondary" className="space-x-2">
+        <CirclePlus className="size-5" />
+        <span>Add new post</span>
       </Button>
     </div>
   );

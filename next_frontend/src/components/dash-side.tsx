@@ -3,6 +3,7 @@ import { ModeToggle } from "./theme-toggler";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
+import { LogOut } from "lucide-react";
 
 export async function DashSideBar() {
   const session = await auth();
@@ -15,16 +16,22 @@ export async function DashSideBar() {
         <ModeToggle />
       </div>
       <Separator className="-mt-2 mb-3" />
-      <Button variant="secondary" className="text-md">
-        <Link href="/dashboard">Posts List</Link>
-      </Button>
+      {/* <Button variant="ghost" className="text-md"> */}
+      {/*   <Link href="/dashboard">Posts List</Link> */}
+      {/* </Button> */}
       <form
         action={async () => {
           "use server";
           await signOut();
         }}
       >
-        <Button variant="destructive">Sign Out</Button>
+        <Button
+          variant="destructive"
+          className="flex flex-row items-center justify-center  gap-2"
+        >
+          <p>Sign Out</p>
+          <LogOut className="size-5" />
+        </Button>
       </form>
     </div>
   );
