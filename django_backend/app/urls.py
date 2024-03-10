@@ -14,9 +14,9 @@ urlpatterns = [
          name="token_obtain_pair"),
     path("api/token/refresh/", CustomTokenRefreshView.as_view(), name="token_refresh"),
 
-    path("comment/", PostListCreateView.as_view(), name='comment-list-create'),
-    path("comment/<int:pk>/", PostRetrieveUpdateDestroyView.as_view(),
-         name='comment-detail-view'),
+    path("post/", PostListCreateView.as_view(), name='post-list-create'),
+    path("post/<int:pk>/", PostRetrieveUpdateDestroyView.as_view(),
+         name='post-detail-view'),
 
     path("register/", RegistrationView.as_view(), name='registration-view'),
     path("change-password/", PasswordChangeView.as_view(),
