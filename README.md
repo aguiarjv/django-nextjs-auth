@@ -26,6 +26,6 @@ TODO
 - When the token expires the user session will be deleted and they will be redirected to the login page.
 
 ## How to setup and additional info
-For additional information on how the Next.js app or the django backend was build and how to set up the project:
+For additional information on how the Next.js app or the django backend was built and how to set up the project:
 - [Django backend information.](/django_backend/)
 - [Next.js app information.](/next_frontend/)
