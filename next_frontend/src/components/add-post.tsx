@@ -33,7 +33,11 @@ export function AddNewPost() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary" className="space-x-2">
+        <Button
+          variant="secondary"
+          className="space-x-2"
+          onClick={() => setState(initialState)}
+        >
           <CirclePlus className="size-5" />
           <span>Add new post</span>
         </Button>
@@ -55,6 +59,7 @@ export function AddNewPost() {
                 name="title"
                 maxLength={50}
                 onChange={() => setState(initialState)}
+                required
               />
               {state.errors?.title &&
                 state.errors?.title.map((error: string) => (
@@ -71,6 +76,7 @@ export function AddNewPost() {
                 rows={7}
                 maxLength={255}
                 onChange={() => setState(initialState)}
+                required
               />
               {state.errors?.content &&
                 state.errors?.content.map((error: string) => (

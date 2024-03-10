@@ -9,9 +9,13 @@ import { z } from "zod";
 const PostSchema = z.object({
   title: z
     .string()
+    .trim()
+    .min(1, { message: "This field is required." })
     .max(50, { message: "Title must be 50 or fewer characters long" }),
   content: z
     .string()
+    .trim()
+    .min(1, { message: "This field is required." })
     .max(255, { message: "Content must be 255 or fewer characters long" }),
 });
 
