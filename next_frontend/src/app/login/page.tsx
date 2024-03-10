@@ -37,7 +37,7 @@ function LoginButton() {
   const { pending } = useFormStatus();
 
   return (
-    <Button className="w-full space-x-2" aria-disabled={pending}>
+    <Button className="w-full space-x-2" type="submit" disabled={pending}>
       <span>Login</span>
       <LogIn className="size-5" />
     </Button>
