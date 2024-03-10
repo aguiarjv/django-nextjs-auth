@@ -100,7 +100,7 @@ export const authConfig = {
       }
     },
 
-    // Data returned by this callback will be accessible by the client
+    // Data returned by this callback will be accessible to the client
     async session({ session, token }) {
       session.error = token.error;
       session.accessToken = token.accessToken;
