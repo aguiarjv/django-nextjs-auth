@@ -4,6 +4,8 @@ import { auth, signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import type { PostState } from "./definitions";
+import { fetchPostById } from "./data";
 
 const PostSchema = z.object({
   title: z
@@ -17,15 +19,6 @@ const PostSchema = z.object({
     .min(1, { message: "This field is required." })
     .max(255, { message: "Content must be 255 or fewer characters long" }),
 });
-
-export type PostState = {
-  errors?: {
-    title?: string[];
-    content?: string[];
-  };
-  databaseError?: string | null;
-  success: boolean;
-};
 
 export async function authenticate(
   prevState: string | undefined,
@@ -49,6 +42,14 @@ export async function authenticate(
 export async function savePost(prevState: PostState, formData: FormData) {
   const session = await auth();
 
+  let method = "POST";
+  let savePostUrl = process.env.BACKEND_URL + "/post/";
+
+  if (formData.get("update")?.toString() == "true") {
+    method = "PUT";
+    savePostUrl += `${formData.get("postid")?.toString()}/`;
+  }
+
   const validatedData = PostSchema.safeParse({
     title: formData.get("title"),
     content: formData.get("content"),
@@ -64,9 +65,8 @@ export async function savePost(prevState: PostState, formData: FormData) {
   }
 
   try {
-    const savePostUrl = process.env.BACKEND_URL + "/post/";
     const response = await fetch(savePostUrl, {
-      method: "POST",
+      method: method,
       headers: {
         Authorization: `Bearer ${session?.accessToken}`,
         "Content-Type": "application/json",
@@ -87,4 +87,32 @@ export async function savePost(prevState: PostState, formData: FormData) {
   revalidatePath("/dashboard");
 
   return { success: true };
+}
+
+export async function deletePost(formData: FormData) {
+  const session = await auth();
+  const postId = formData.get("postid")?.toString();
+  const deleteUrl = process.env.BACKEND_URL + `/post/${postId}/`;
+
+  try {
+    const response = await fetch(deleteUrl, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+    });
+
+    if (!response.ok) throw Error("Error");
+  } catch (err) {
+    console.log("Error deleting post ", err);
+  }
+  // Revalidate the cache for the dashboard page
+  revalidatePath("/dashboard");
+}
+
+export async function getPostById(id: number) {
+  const session = await auth();
+  const data = await fetchPostById(id, session?.accessToken);
+
+  return data;
 }

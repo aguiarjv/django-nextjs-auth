@@ -17,3 +17,12 @@ export type PostResponse = {
 export type PostResponseError = {
   error: "FetchPostsError";
 };
+
+export type PostState = {
+  errors?: {
+    title?: string[];
+    content?: string[];
+  };
+  databaseError?: string | null;
+  success: boolean;
+};

@@ -17,7 +17,7 @@ import { Textarea } from "./ui/textarea";
 import { useFormState, useFormStatus } from "react-dom";
 import { savePost } from "@/lib/actions";
 import { useEffect, useState } from "react";
-import type { PostState } from "@/lib/actions";
+import type { PostState } from "@/lib/definitions";
 
 export function AddNewPost() {
   const initialState = { success: false, databaseError: null, errors: {} };

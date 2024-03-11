@@ -1,5 +1,3 @@
-import { Ellipsis } from "lucide-react";
-import { Button } from "./ui/button";
 import {
   Table,
   TableBody,
@@ -8,6 +6,7 @@ import {
   TableRow,
   TableHeader,
 } from "./ui/table";
+import { TableOptions } from "./dash-table-options";
 
 import type { PostData } from "@/lib/definitions";
 
@@ -31,19 +30,11 @@ export function DashTable({ data }: { data: PostData[] }) {
             <TableCell colSpan={2}>{item.content}</TableCell>
             <TableCell>{item.created_at}</TableCell>
             <TableCell>
-              <TableOptions />
+              <TableOptions postId={item.id} />
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
     </Table>
-  );
-}
-
-function TableOptions() {
-  return (
-    <Button variant="outline" size="icon" className="size-8">
-      <Ellipsis className="size-6" />
-    </Button>
   );
 }
