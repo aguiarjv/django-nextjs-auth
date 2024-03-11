@@ -7,6 +7,7 @@ import { z } from "zod";
 import type { PostState, RegisterState } from "./definitions";
 import { fetchPostById } from "./data";
 import { redirect } from "next/navigation";
+import { dummyData } from "./dummy-data";
 
 const PostSchema = z.object({
   title: z
@@ -171,4 +172,30 @@ export async function getPostById(id: number) {
   const data = await fetchPostById(id, session?.accessToken);
 
   return data;
+}
+
+export async function generatePosts() {
+  const session = await auth();
+  const postsList = dummyData;
+
+  for (let post of postsList) {
+    try {
+      const savePostURL = process.env.BACKEND_URL + "/post/";
+      const response = await fetch(savePostURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session?.accessToken}`,
+        },
+        body: JSON.stringify({ title: post.title, content: post.content }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) throw data;
+    } catch (err) {
+      console.log("Error when generating posts ", err);
+    }
+  }
+  revalidatePath("/dashboard");
 }
