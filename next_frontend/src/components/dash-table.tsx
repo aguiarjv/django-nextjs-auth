@@ -18,7 +18,7 @@ export function DashTable({ data }: { data: PostData[] }) {
           <TableHead className="w-[100px]">ID</TableHead>
           <TableHead className="w-[200px]">Title</TableHead>
           <TableHead colSpan={2}>Content</TableHead>
-          <TableHead>Created At</TableHead>
+          <TableHead>Created On</TableHead>
           <TableHead></TableHead>
         </TableRow>
       </TableHeader>
