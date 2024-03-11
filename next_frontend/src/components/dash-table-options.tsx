@@ -43,7 +43,7 @@ export function TableOptions({ postId }: { postId: number }) {
             <Ellipsis className="size-6" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent side="bottom" align="start">
           <DropdownMenuLabel>Post Options</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={() => setShowDetail(true)}>
