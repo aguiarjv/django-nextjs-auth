@@ -77,6 +77,7 @@ export function AddNewPost() {
                 maxLength={255}
                 onChange={() => setState(initialState)}
                 required
+                spellCheck={false}
               />
               {state.errors?.content &&
                 state.errors?.content.map((error: string) => (
