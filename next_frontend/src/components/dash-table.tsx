@@ -9,7 +9,7 @@ import {
   TableHeader,
 } from "./ui/table";
 
-import type { PostData } from "./dash-main";
+import type { PostData } from "@/lib/definitions";
 
 export function DashTable({ data }: { data: PostData[] }) {
   return (

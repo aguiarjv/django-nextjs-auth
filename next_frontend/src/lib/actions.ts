@@ -1,9 +1,8 @@
 "use server";
 
-import { auth, signIn, signOut } from "@/auth";
+import { auth, signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const PostSchema = z.object({
