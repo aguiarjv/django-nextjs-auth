@@ -17,7 +17,10 @@ export default async function Dashboard({
   return (
     <div className="p-6 flex flex-col gap-2 max-w-[1000px] mx-auto">
       <DashHeader />
-      <Suspense fallback={<p>loading...</p>}>
+      <Suspense
+        key={String(searchParams?.title) + String(searchParams?.page)}
+        fallback={<p>loading...</p>}
+      >
         <DashMain searchParams={searchParams} />
       </Suspense>
     </div>
