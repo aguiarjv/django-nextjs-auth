@@ -60,6 +60,10 @@ async function DashMain({
       if (item.content.length > 35) {
         item.content = item.content.slice(0, 36) + "...";
       }
+
+      if (item.title.length > 35) {
+        item.title = item.title.slice(0, 36) + "...";
+      }
     });
   }
 
