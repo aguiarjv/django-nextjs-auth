@@ -9,20 +9,9 @@ import {
   TableHeader,
 } from "./ui/table";
 
-const data = [
-  { id: 1, title: "test", content: "just commenting", created_at: "11-22-30" },
-  { id: 2, title: "test", content: "just commenting", created_at: "11-22-30" },
-  { id: 3, title: "test", content: "just commenting", created_at: "11-22-30" },
-  { id: 4, title: "test", content: "just commenting", created_at: "11-22-30" },
-  { id: 5, title: "test", content: "just commenting", created_at: "11-22-30" },
-  { id: 6, title: "test", content: "just commenting", created_at: "11-22-30" },
-  { id: 7, title: "test", content: "just commenting", created_at: "11-22-30" },
-  { id: 8, title: "test", content: "just commenting", created_at: "11-22-30" },
-  { id: 9, title: "test", content: "just commenting", created_at: "11-22-30" },
-  { id: 10, title: "test", content: "just commenting", created_at: "11-22-30" },
-];
+import type { PostData } from "./dash-main";
 
-export function DashTable() {
+export function DashTable({ data }: { data: PostData[] }) {
   return (
     <Table>
       <TableHeader>

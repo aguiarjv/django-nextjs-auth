@@ -1,16 +1,18 @@
-import { auth } from "@/auth";
-import { DashTable } from "@/components/dash-table";
 import { DashHeader } from "@/components/dash-header";
-import { DashPagination } from "@/components/dash-pagination";
+import { DashMain } from "@/components/dash-main";
 
-export default async function Dashboard() {
-  const session = await auth();
-
+export default async function Dashboard({
+  searchParams,
+}: {
+  searchParams?: {
+    title?: string;
+    page?: string;
+  };
+}) {
   return (
     <div className="p-6 flex flex-col gap-2 max-w-[1000px] mx-auto">
       <DashHeader />
-      <DashTable />
-      <DashPagination />
+      <DashMain searchParams={searchParams} />
     </div>
   );
 }
