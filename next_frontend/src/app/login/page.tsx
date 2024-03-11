@@ -25,8 +25,8 @@ export default function Login() {
             <p className="text-red-500 font-medium -mt-4">{errorMessage}</p>
           )}
         </div>
-        <Link href="/dasbhoard" className="self-start -mt-8 -ml-2">
-          <Button variant="link">New user? Sign in</Button>
+        <Link href="/signup" className="self-start -mt-8 -ml-2">
+          <Button variant="link">New user? Sign up</Button>
         </Link>
       </form>
     </div>

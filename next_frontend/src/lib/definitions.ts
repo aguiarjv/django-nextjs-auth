@@ -26,3 +26,12 @@ export type PostState = {
   databaseError?: string | null;
   success: boolean;
 };
+
+export type RegisterState = {
+  errors?: {
+    email?: string[];
+    password?: string[];
+    password2?: string[];
+  };
+  success?: boolean;
+};

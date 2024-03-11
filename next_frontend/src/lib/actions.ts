@@ -4,8 +4,9 @@ import { auth, signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import type { PostState } from "./definitions";
+import type { PostState, RegisterState } from "./definitions";
 import { fetchPostById } from "./data";
+import { redirect } from "next/navigation";
 
 const PostSchema = z.object({
   title: z
@@ -18,6 +19,16 @@ const PostSchema = z.object({
     .trim()
     .min(1, { message: "This field is required." })
     .max(255, { message: "Content must be 255 or fewer characters long" }),
+});
+
+const RegisterSchema = z.object({
+  email: z.string().trim().email(),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters long" }),
+  password2: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters long" }),
 });
 
 export async function authenticate(
@@ -37,6 +48,51 @@ export async function authenticate(
     }
     throw error;
   }
+}
+
+export async function register(prevState: RegisterState, formData: FormData) {
+  const validatedData = RegisterSchema.safeParse({
+    email: formData.get("email"),
+    password: formData.get("password"),
+    password2: formData.get("password2"),
+  });
+
+  if (!validatedData.success) {
+    return {
+      errors: validatedData.error.flatten().fieldErrors,
+      success: false,
+    };
+  }
+
+  if (validatedData.data.password != validatedData.data.password2) {
+    return {
+      errors: { password2: ["Passwords must match"] },
+      success: false,
+    };
+  }
+
+  try {
+    const registerUrl = process.env.BACKEND_URL + "/register/";
+    const response = await fetch(registerUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: validatedData.data.email,
+        password: validatedData.data.password,
+        password2: validatedData.data.password2,
+      }),
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw data;
+  } catch (err) {
+    console.log("Error registering new user ", err);
+    return { errors: {}, success: false };
+  }
+
+  redirect("/login");
 }
 
 export async function savePost(prevState: PostState, formData: FormData) {
