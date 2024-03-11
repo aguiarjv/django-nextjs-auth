@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 from posts.models import Post
 from posts.serializers import PostSerializer
@@ -14,6 +15,8 @@ def filtered_posts(user):
 class PostListCreateView(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated]
+    filter_backends = [filters.OrderingFilter]
+    ordering = ['-created_at']
 
     def get_queryset(self):
         title = self.request.query_params.get('title')
