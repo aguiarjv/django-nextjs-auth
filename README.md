@@ -7,12 +7,10 @@ The main goal of this project was for studying purposes and to build an example 
 
 ## Screenshots
 
-![Main Screen](/screenshots/main-page.png?raw=true "Main Screen")
-
-- Register screen
-- Login screen
-- Dashboard table screen
-- New post screen
+![Main Page](/screenshots/main-page.png?raw=true "Main Page")
+![New Post](/screenshots/add-post-dialog.png?raw=true "New Post Dialog")
+![New Account](/screenshots/new-account.png?raw=true "New Account")
+![Login Page](/screenshots/login.png?raw=true "Login Page")
 
 ## Auth
 
