@@ -28,6 +28,7 @@ import type { Dispatch } from "react";
 import type { PostState } from "@/lib/definitions";
 import { useFormState, useFormStatus } from "react-dom";
 import { savePost } from "@/lib/actions";
+import { Separator } from "./ui/separator";
 
 export function TableOptions({ postId }: { postId: number }) {
   const [showDetail, setShowDetail] = useState(false);
@@ -116,6 +117,8 @@ function PostDetail({
   postId: number;
 }) {
   const [title, setTitle] = useState("");
+  const [email, setEmail] = useState("");
+  const [created, setCreated] = useState("");
   const [content, setContent] = useState("");
 
   useEffect(() => {
@@ -125,6 +128,8 @@ function PostDetail({
         if (!("error" in data)) {
           setTitle(data.title);
           setContent(data.content);
+          setEmail(data.user);
+          setCreated(data.created_at);
         }
       };
       getData();
@@ -140,10 +145,28 @@ function PostDetail({
             Check the full information of the selected post.
           </DialogDescription>
         </DialogHeader>
-        <h3 className="text-md font-bold">Title</h3>
-        <p className="text-sm font-medium -mt-2">{title}</p>
-        <h3 className="text-md font-bold">Content</h3>
-        <p className="text-sm font-medium -mt-2">{content}</p>
+        <div>
+          <div className="flex flex-row items-center gap-2">
+            <h3 className="text-sm font-bold">User:</h3>
+            <p className="text-sm font-medium">{email}</p>
+          </div>
+          <div className="flex flex-row items-center gap-2">
+            <h3 className="text-sm font-bold">Post ID:</h3>
+            <p className="text-sm font-medium">{postId}</p>
+          </div>
+
+          <div className="flex flex-row items-center gap-2">
+            <h3 className="text-sm font-bold">Created At:</h3>
+            <p className="text-sm font-medium">{created}</p>
+          </div>
+        </div>
+        <Separator />
+        <div>
+          <h3 className="text-md font-bold">Title</h3>
+          <p className="text-sm font-medium">{title}</p>
+          <h3 className="text-md font-bold">Content</h3>
+          <p className="text-sm font-medium">{content}</p>
+        </div>
       </DialogContent>
     </Dialog>
   );
