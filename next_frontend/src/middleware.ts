@@ -15,5 +15,5 @@ export const config = {
    * - favicon.ico (favicon file)
    * - png files
    */
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\.png$).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\.png$|$).*)"],
 };
